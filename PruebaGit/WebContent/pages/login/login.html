@@ -1,18 +1,23 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Facebook Login JavaScript Example</title>
-<meta charset="UTF-8">
-</head>
-<body>
-<!--  GOOGLE + -->
-<span id="signinButton"> <span class="g-signin"
+<form>
+	<!-- GOOGLE + -->
+	<span id="signinButton"> <span class="g-signin"
 		data-callback="signinCallback"
 		data-clientid="164139953935-tlto5111khg0un728f4t83hqd8qritpf.apps.googleusercontent.com"
 		data-cookiepolicy="single_host_origin"
 		data-requestvisibleactions="http://schemas.google.com/AddActivity"
 		data-scope="https://www.googleapis.com/auth/plus.login"> </span>
 	</span>
+
+	<!--
+		Below we include the Login Button social plugin. This button uses
+		the JavaScript SDK to present a graphical Login button that triggers
+		the FB.login() function when clicked.
+		-->
+	<fb:login-button scope="public_profile,email"
+		onlogin="checkLoginState();">
+	</fb:login-button>
+	<div id="status"></div>
+
 
 	<!-- Coloca este JavaScript asíncrono justo delante de la etiqueta </body> -->
 	<script type="text/javascript">
@@ -25,8 +30,9 @@
 			s.parentNode.insertBefore(po, s);
 		})();
 	</script>
-	
-	<!--  FACEBOOK -->
+
+
+	<!-- FACEBOOK -->
 	<script>
 		// This is called with the results from from FB.getLoginStatus().
 		function statusChangeCallback(response) {
@@ -50,43 +56,37 @@
 						+ 'into Facebook.';
 			}
 		}
-
 		// This function is called when someone finishes with the Login
-		// Button.  See the onlogin handler attached to it in the sample
+		// Button. See the onlogin handler attached to it in the sample
 		// code below.
 		function checkLoginState() {
 			FB.getLoginStatus(function(response) {
 				statusChangeCallback(response);
 			});
 		}
-
 		window.fbAsyncInit = function() {
 			FB.init({
 				appId : '387880144715063',
-				cookie : true, // enable cookies to allow the server to access 
+				cookie : true, // enable cookies to allow the server to access
 				// the session
 				xfbml : true, // parse social plugins on this page
 				version : 'v2.1' // use version 2.1
 			});
-
-			// Now that we've initialized the JavaScript SDK, we call 
-			// FB.getLoginStatus().  This function gets the state of the
+			// Now that we've initialized the JavaScript SDK, we call
+			// FB.getLoginStatus(). This function gets the state of the
 			// person visiting this page and can return one of three states to
-			// the callback you provide.  They can be:
+			// the callback you provide. They can be:
 			//
 			// 1. Logged into your app ('connected')
 			// 2. Logged into Facebook, but not your app ('not_authorized')
 			// 3. Not logged into Facebook and can't tell if they are logged into
-			//    your app or not.
+			// your app or not.
 			//
 			// These three cases are handled in the callback function.
-
 			FB.getLoginStatus(function(response) {
 				statusChangeCallback(response);
 			});
-
 		};
-
 		// Load the SDK asynchronously
 		(function(d, s, id) {
 			var js, fjs = d.getElementsByTagName(s)[0];
@@ -97,11 +97,10 @@
 			js.src = "//connect.facebook.net/en_US/sdk.js";
 			fjs.parentNode.insertBefore(js, fjs);
 		}(document, 'script', 'facebook-jssdk'));
-
 		// Here we run a very simple test of the Graph API after login is
-		// successful.  See statusChangeCallback() for when this call is made.
+		// successful. See statusChangeCallback() for when this call is made.
 		function testAPI() {
-			console.log('Welcome!  Fetching your information.... ');
+			console.log('Welcome! Fetching your information.... ');
 			FB
 					.api(
 							'/me',
@@ -110,41 +109,29 @@
 										+ response.name);
 								document.getElementById('status').innerHTML = 'Thanks for logging in, '
 										+ response.name + '!';
-								window.location.assign("http://localhost:8080/PruebaGit/home.html");
+								window.location
+										.assign("http://localhost:8080/PruebaGit/home.html");
 							});
 		}
 	</script>
 
-	<!--
-  Below we include the Login Button social plugin. This button uses
-  the JavaScript SDK to present a graphical Login button that triggers
-  the FB.login() function when clicked.
--->
-
-	<fb:login-button scope="public_profile,email"
-		onlogin="checkLoginState();">
-	</fb:login-button>
-
-	<div id="status"></div>
-
-</body>
-
-<script type="text/javascript">
-//GOOGLE +
-	function signinCallback(authResult) {
-		if (authResult['access_token']) {
-			// Autorizado correctamente
-			// Oculta el botón de inicio de sesión ahora que el usuario está autorizado, por ejemplo:
-			window.location.assign("http://localhost:8080/PruebaGit/home.html");
-			document.getElementById('signinButton').setAttribute('style',
-					'display: none');
-		} else if (authResult['error']) {
-			// Se ha producido un error.
-			// Posibles códigos de error:
-			//   "access_denied": el usuario ha denegado el acceso a la aplicación.
-			//   "immediate_failed": no se ha podido dar acceso al usuario de forma automática.
-			console.log('There was an error: ' + authResult['error']);
+	<script type="text/javascript">
+		//GOOGLE +
+		function signinCallback(authResult) {
+			if (authResult['access_token']) {
+				// Autorizado correctamente
+				// Oculta el botón de inicio de sesión ahora que el usuario está autorizado, por ejemplo:
+				window.location
+						.assign("http://localhost:8080/PruebaGit/pages/home/home.html");
+				document.getElementById('signinButton').setAttribute('style',
+						'display: none');
+			} else if (authResult['error']) {
+				// Se ha producido un error.
+				// Posibles códigos de error:
+				// "access_denied": el usuario ha denegado el acceso a la aplicación.
+				// "immediate_failed": no se ha podido dar acceso al usuario de forma automática.
+				console.log('There was an error: ' + authResult['error']);
+			}
 		}
-	}
-</script>
-</html>
+	</script>
+</form>
