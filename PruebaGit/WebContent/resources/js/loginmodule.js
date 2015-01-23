@@ -5,7 +5,7 @@ var angularLoginModule = angular.module('angularLoginModule', [ 'ngRoute' ]);
 // / *** CONFIGURATIONS *** / //
 
 angularLoginModule.config([ '$routeProvider', function($routeProvider) {
-	$routeProvider.when('/login', {
+	$routeProvider.when('/', {
 		templateUrl : './pages/login/login.html',
 		controller : 'loginController'
 	});
@@ -23,14 +23,14 @@ angularLoginModule.run(function($rootScope, $location) {
 
 angularLoginModule.controller('loginController', function($scope, $location) {
 	
-	//function() {
+	/*function() {
 		var po = document.createElement('script');
 		po.type = 'text/javascript';
 		po.async = true;
 		po.src = 'https://apis.google.com/js/client:plusone.js';
 		var s = document.getElementsByTagName('script')[0];
 		s.parentNode.insertBefore(po, s);
-	//}
+	}
 	
 	function signinCallback(authResult) {
 		if (authResult['access_token']) {
@@ -48,7 +48,7 @@ angularLoginModule.controller('loginController', function($scope, $location) {
 			console.log('There was an error: ' + authResult['error']);
 		}
 	}
-	
+	*/
 
 	// This is called with the results from from FB.getLoginStatus().
 	function statusChangeCallback(response) {
@@ -73,10 +73,12 @@ angularLoginModule.controller('loginController', function($scope, $location) {
 		}
 	}
 
+	
 	// This function is called when someone finishes with the Login
 	// Button.  See the onlogin handler attached to it in the sample
 	// code below.
 	function checkLoginState() {
+		console.log("ChekLoginState!!!!");
 		FB.getLoginStatus(function(response) {
 			statusChangeCallback(response);
 		});
@@ -133,7 +135,7 @@ angularLoginModule.controller('loginController', function($scope, $location) {
 							document.getElementById('status').innerHTML = 'Thanks for logging in, '
 									+ response.name + '!';
 							window.location
-									.assign("http://localhost:8080/PruebaGit/home.html");
+									.assign("http://localhost:8080/PruebaGit/pages/home/home.html");
 						});
 	}
 	
