@@ -1,14 +1,21 @@
-<form>
-	<!--
-		Below we include the Login Button social plugin. This button uses
-		the JavaScript SDK to present a graphical Login button that triggers
-		the FB.login() function when clicked.
-		-->
-		
-	<div id="status"></div>
-	<fb:login-button scope="public_profile,email" data-show-faces="true"
-		onlogin="checkLoginState();" data-auto-logout-link="true"
-		data-size="large">
-	</fb:login-button>
-
+<form class="form-inline" name="loginForm" role="form" >
+	<div class="container">
+		<h1 style="text-align: center;">Iniciar Sesi&oacute;n</h1>
+		<br>
+		<div style="text-align: center;">
+			<fb:login-button scope="public_profile,email"
+				onlogin="checkLoginState();" data-auto-logout-link="true">Acceder
+			</fb:login-button>
+		</div>
+		<br>
+		<div style="text-align: center;">
+			<span id="signinButton"> <span class="g-signin"
+				data-callback="signinCallback"
+				data-clientid="164139953935-tlto5111khg0un728f4t83hqd8qritpf.apps.googleusercontent.com"
+				data-cookiepolicy="single_host_origin"
+				data-requestvisibleactions="http://schemas.google.com/AddActivity"
+				data-scope="https://www.googleapis.com/auth/plus.login"> </span>
+			</span>
+		</div>
+	</div>
 </form>

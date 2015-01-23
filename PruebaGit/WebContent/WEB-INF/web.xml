@@ -5,7 +5,6 @@
 	id="WebApp_ID" version="3.0">
 	<display-name>PruebaGit</display-name>
 	<welcome-file-list>
-	<!-- <welcome-file>index.html</welcome-file> -->
-		<welcome-file>loginoauth.html</welcome-file>
+		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
 </web-app>
